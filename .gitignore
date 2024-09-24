@@ -1,2 +1,6 @@
 ﻿.idea/
 build/
+bin/
+obj/
+Crony.csproj
+Crony.csproj.user
