@@ -1,41 +1,41 @@
-﻿using System.ComponentModel;
-
-namespace Crony;
-
-partial class MainForm
+﻿namespace Crony
 {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private IContainer components = null;
-
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
+    partial class MainForm
     {
-        if (disposing && (components != null))
+        private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Button btnToggleKeyboard;
+
+        protected override void Dispose(bool disposing)
         {
-            components.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
-        base.Dispose(disposing);
+        private void InitializeComponent()
+        {
+            this.btnToggleKeyboard = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            
+            // 
+            // btnToggleKeyboard
+            // 
+            this.btnToggleKeyboard.Location = new System.Drawing.Point(100, 100); // Установи нужные координаты
+            this.btnToggleKeyboard.Name = "btnToggleKeyboard";
+            this.btnToggleKeyboard.Size = new System.Drawing.Size(100, 50); // Установи нужный размер
+            this.btnToggleKeyboard.Text = "Disable Keyboard";
+            this.btnToggleKeyboard.UseVisualStyleBackColor = true;
+            this.btnToggleKeyboard.Click += new System.EventHandler(this.BtnToggleKeyboard_Click);
+            
+            // 
+            // MainForm
+            // 
+            this.ClientSize = new System.Drawing.Size(300, 200); // Размер окна
+            this.Controls.Add(this.btnToggleKeyboard); // Добавляем кнопку в форму
+            this.Name = "MainForm";
+            this.ResumeLayout(false);
+        }
     }
-
-    #region Windows Form Designer generated code
-
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent()
-    {
-        this.components = new System.ComponentModel.Container();
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
-        this.Text = "MainForm";
-    }
-
-    #endregion
 }

@@ -11,10 +11,7 @@ namespace Crony
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Создаем иконку в трее и запускаем без окна
             TrayApplication trayApp = new TrayApplication();
-            
-            // Запускаем приложение без открытия формы
             Application.Run();
         }
     }

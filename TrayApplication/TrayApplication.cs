@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Crony
@@ -11,45 +10,39 @@ namespace Crony
 
         public TrayApplication()
         {
-            // Создаем значок трея
-            trayIcon = new NotifyIcon
-            {
-                Icon = SystemIcons.Application, // Устанавливаем стандартную иконку
-                Visible = true
-            };
+            // Создаем иконку для трея
+            trayIcon = new NotifyIcon();
+            trayIcon.Text = "Tray App";
+            trayIcon.Icon = new Icon("Resources/icon.ico"); // Можно заменить на свою иконку, если нужно
 
+            // Контекстное меню при правом клике
+            var contextMenu = new ContextMenuStrip();
+            var exitMenuItem = new ToolStripMenuItem("Exit", null, OnExit);
+            contextMenu.Items.Add(exitMenuItem);
+
+            trayIcon.ContextMenuStrip = contextMenu;
+            trayIcon.Visible = true;
+
+            // Обработчик кликов по иконке
             trayIcon.MouseClick += TrayIcon_MouseClick;
 
-            // Инициализируем главную форму
+            // Создаем основное окно
             mainForm = new MainForm();
-            mainForm.ShowInTaskbar = false;  // Скрываем иконку в панели задач
         }
 
-        // Обработка клика по значку трея
         private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
         {
+            // ЛКМ - открытие/закрытие окна
             if (e.Button == MouseButtons.Left)
             {
-                // Показываем форму только при клике левой кнопкой мыши
-                if (!mainForm.Visible)
-                {
-                    Point trayIconPosition = Cursor.Position;
-                    mainForm.SetPositionAboveTray(trayIconPosition);
-                    mainForm.Show();
-                    mainForm.Activate(); // Активируем форму
-                }
-                else
-                {
-                    mainForm.Hide(); // Если форма уже открыта, скрываем её при повторном клике
-                }
+                mainForm.ToggleWindow(); // Переключение отображения окна
             }
-            else if (e.Button == MouseButtons.Right)
-            {
-                // Контекстное меню при правом клике
-                ContextMenuStrip contextMenu = new ContextMenuStrip();
-                contextMenu.Items.Add("Закрыть", null, (s, args) => Application.Exit());
-                contextMenu.Show(Cursor.Position);
-            }
+        }
+
+        private void OnExit(object sender, EventArgs e)
+        {
+            trayIcon.Visible = false;
+            Application.Exit();
         }
     }
 }
