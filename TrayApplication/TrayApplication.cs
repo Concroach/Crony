@@ -3,46 +3,28 @@ using System.Windows.Forms;
 
 namespace Crony
 {
-    public class TrayApplication
+    class TrayApplication
     {
         private NotifyIcon trayIcon;
         private MainForm mainForm;
 
         public TrayApplication()
         {
-            // Создаем иконку для трея
-            trayIcon = new NotifyIcon();
-            trayIcon.Text = "Tray App";
-            trayIcon.Icon = new Icon("Resources/icon.ico"); // Можно заменить на свою иконку, если нужно
-
-            // Контекстное меню при правом клике
-            var contextMenu = new ContextMenuStrip();
-            var exitMenuItem = new ToolStripMenuItem("Exit", null, OnExit);
-            contextMenu.Items.Add(exitMenuItem);
-
-            trayIcon.ContextMenuStrip = contextMenu;
-            trayIcon.Visible = true;
-
-            // Обработчик кликов по иконке
-            trayIcon.MouseClick += TrayIcon_MouseClick;
-
-            // Создаем основное окно
             mainForm = new MainForm();
-        }
 
-        private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-            // ЛКМ - открытие/закрытие окна
-            if (e.Button == MouseButtons.Left)
+            trayIcon = new NotifyIcon()
             {
-                mainForm.ToggleWindow(); // Переключение отображения окна
-            }
+                Icon = new System.Drawing.Icon("resources/icon.ico"), // Укажи путь к своей иконке
+                Visible = true,
+                Text = "Tray App"
+            };
+
+            trayIcon.Click += TrayIcon_Click;
         }
 
-        private void OnExit(object sender, EventArgs e)
+        private void TrayIcon_Click(object sender, EventArgs e)
         {
-            trayIcon.Visible = false;
-            Application.Exit();
+            mainForm.ToggleWindow(); // Открытие/закрытие окна
         }
     }
 }

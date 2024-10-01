@@ -5,21 +5,28 @@ namespace Crony
 {
     public partial class MainForm : Form
     {
-        private bool isKeyboardDisabled = false;
-
         public MainForm()
         {
             InitializeComponent();
 
-            // Фиксируем окно: нельзя передвигать, масштабировать, оно поверх других
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            // Устанавливаем свойства формы для предотвращения появления иконки в панели задач
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.ShowInTaskbar = false;
             this.StartPosition = FormStartPosition.Manual;
             this.TopMost = true;
-            this.ShowInTaskbar = false;
-            this.Size = new System.Drawing.Size(300, 200); // Компактный размер окна
-            this.MouseClick += (sender, e) => { if (!this.Bounds.Contains(Cursor.Position)) this.Hide(); };
+
+            // Фиксированное положение окна
+            this.Location = new System.Drawing.Point(
+                Screen.PrimaryScreen.WorkingArea.Width - this.Width - 20, 
+                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 20);
+
+            // Установка события на потерю фокуса окна
+            this.Deactivate += MainForm_Deactivate;
+        }
+
+        private void MainForm_Deactivate(object sender, EventArgs e)
+        {
+            this.Hide(); // Скрываем окно при потере фокуса
         }
 
         public void ToggleWindow()
@@ -30,39 +37,14 @@ namespace Crony
             }
             else
             {
-                // Позиционирование окна над треем
-                var screen = Screen.FromControl(this);
-                this.Location = new System.Drawing.Point(screen.Bounds.Width - this.Width, screen.Bounds.Height - this.Height - 40);
                 this.Show();
-                this.Activate();
+                this.BringToFront();
             }
         }
 
-        private void BtnToggleKeyboard_Click(object sender, EventArgs e)
+        // Обработчик события кнопки ToggleKeyboard
+        private void btnToggleKeyboard_Click(object sender, EventArgs e)
         {
-            if (isKeyboardDisabled)
-            {
-                EnableKeyboard();
-                btnToggleKeyboard.Text = "Disable Keyboard";
-                isKeyboardDisabled = false;
-            }
-            else
-            {
-                DisableKeyboard();
-                btnToggleKeyboard.Text = "Enable Keyboard";
-                isKeyboardDisabled = true;
-            }
-        }
-
-        private void DisableKeyboard()
-        {
-            // Отключение клавиатуры
-            KeyboardManager.ToggleKeyboard();
-        }
-
-        private void EnableKeyboard()
-        {
-            // Включение клавиатуры
             KeyboardManager.ToggleKeyboard();
         }
     }
