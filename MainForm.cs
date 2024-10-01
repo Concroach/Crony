@@ -5,6 +5,8 @@ namespace Crony
 {
     public partial class MainForm : Form
     {
+        private bool isKeyboardEnabled = true;
+
         public MainForm()
         {
             InitializeComponent();
@@ -17,11 +19,14 @@ namespace Crony
 
             // Фиксированное положение окна
             this.Location = new System.Drawing.Point(
-                Screen.PrimaryScreen.WorkingArea.Width - this.Width - 20, 
-                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 20);
+                Screen.PrimaryScreen.WorkingArea.Width - this.Width * 3 / 2, 
+                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 1);
 
             // Установка события на потерю фокуса окна
             this.Deactivate += MainForm_Deactivate;
+
+            // Обновление текста кнопки при инициализации
+            UpdateButtonLabel();
         }
 
         private void MainForm_Deactivate(object sender, EventArgs e)
@@ -45,7 +50,30 @@ namespace Crony
         // Обработчик события кнопки ToggleKeyboard
         private void btnToggleKeyboard_Click(object sender, EventArgs e)
         {
-            KeyboardManager.ToggleKeyboard();
+            ToggleKeyboard();
+        }
+
+        private void ToggleKeyboard()
+        {
+            // Включение или отключение клавиатуры
+            if (isKeyboardEnabled)
+            {
+                KeyboardManager.ToggleKeyboard(); // Отключение
+                isKeyboardEnabled = false;
+            }
+            else
+            {
+                KeyboardManager.ToggleKeyboard(); // Включение
+                isKeyboardEnabled = true;
+            }
+
+            // Обновление текста на кнопке
+            UpdateButtonLabel();
+        }
+
+        private void UpdateButtonLabel()
+        {
+            btnToggleKeyboard.Text = isKeyboardEnabled ? "Выключить клавиатуру" : "Включить клавиатуру";
         }
     }
 }
