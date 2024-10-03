@@ -19,8 +19,8 @@ namespace Crony
 
             // Фиксированное положение окна
             this.Location = new System.Drawing.Point(
-                Screen.PrimaryScreen.WorkingArea.Width - this.Width - 20, 
-                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 20);
+                Screen.PrimaryScreen.WorkingArea.Width - this.Width * 3 / 2, 
+                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 1);
 
             // Установка события на потерю фокуса окна
             this.Deactivate += MainForm_Deactivate;
