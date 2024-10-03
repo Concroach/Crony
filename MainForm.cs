@@ -5,7 +5,7 @@ namespace Crony
 {
     public partial class MainForm : Form
     {
-        private bool isKeyboardEnabled = true;
+        private bool isWindowOpen = false; // Флаг состояния окна
 
         public MainForm()
         {
@@ -19,61 +19,43 @@ namespace Crony
 
             // Фиксированное положение окна
             this.Location = new System.Drawing.Point(
-                Screen.PrimaryScreen.WorkingArea.Width - this.Width * 3 / 2, 
-                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 1);
+                Screen.PrimaryScreen.WorkingArea.Width - this.Width - 20, 
+                Screen.PrimaryScreen.WorkingArea.Height - this.Height - 20);
 
             // Установка события на потерю фокуса окна
             this.Deactivate += MainForm_Deactivate;
-
-            // Обновление текста кнопки при инициализации
-            UpdateButtonLabel();
         }
 
-        private void MainForm_Deactivate(object sender, EventArgs e)
-        {
-            this.Hide(); // Скрываем окно при потере фокуса
-        }
-
+        // Метод для открытия и закрытия окна
         public void ToggleWindow()
         {
-            if (this.Visible)
+            if (isWindowOpen)
             {
-                this.Hide();
+                Console.WriteLine(2);
+                this.Hide();  // Скрываем окно, если оно было открыто
+                isWindowOpen = false;  // Обновляем флаг
             }
             else
             {
-                this.Show();
-                this.BringToFront();
+                Console.WriteLine(1);
+                this.Show();  // Показываем окно, если оно было скрыто
+                this.BringToFront();  // Делаем окно на переднем плане
+                this.Activate();  // Программно активируем окно
+                isWindowOpen = true;  // Обновляем флаг
+            }
+        }
+
+        // Обработчик для сворачивания окна при потере фокуса
+        private void MainForm_Deactivate(object sender, EventArgs e)
+        {
+            if (isWindowOpen)
+            {
+                this.Hide();  // Скрываем окно при потере фокуса
+                isWindowOpen = false;  // Обновляем флаг
             }
         }
 
         // Обработчик события кнопки ToggleKeyboard
-        private void btnToggleKeyboard_Click(object sender, EventArgs e)
-        {
-            ToggleKeyboard();
-        }
-
-        private void ToggleKeyboard()
-        {
-            // Включение или отключение клавиатуры
-            if (isKeyboardEnabled)
-            {
-                KeyboardManager.ToggleKeyboard(); // Отключение
-                isKeyboardEnabled = false;
-            }
-            else
-            {
-                KeyboardManager.ToggleKeyboard(); // Включение
-                isKeyboardEnabled = true;
-            }
-
-            // Обновление текста на кнопке
-            UpdateButtonLabel();
-        }
-
-        private void UpdateButtonLabel()
-        {
-            btnToggleKeyboard.Text = isKeyboardEnabled ? "Выключить клавиатуру" : "Включить клавиатуру";
-        }
+        
     }
 }

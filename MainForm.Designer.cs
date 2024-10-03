@@ -20,13 +20,6 @@
             this.SuspendLayout();
             
             // btnToggleKeyboard
-            this.btnToggleKeyboard.Location = new System.Drawing.Point(12, 12);
-            this.btnToggleKeyboard.Name = "btnToggleKeyboard";
-            this.btnToggleKeyboard.Size = new System.Drawing.Size(150, 23);
-            this.btnToggleKeyboard.TabIndex = 0;
-            this.btnToggleKeyboard.Text = "Выключить клавиатуру"; // Изначально, если клавиатура включена
-            this.btnToggleKeyboard.UseVisualStyleBackColor = true;
-            this.btnToggleKeyboard.Click += new System.EventHandler(this.btnToggleKeyboard_Click);
             
             // MainForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
