@@ -9,10 +9,17 @@ namespace Crony
 
         private static bool _isKeyboardBlocked = false;
 
+        // Метод для переключения состояния клавиатуры
         public static void ToggleKeyboard()
         {
             _isKeyboardBlocked = !_isKeyboardBlocked;
             BlockInput(_isKeyboardBlocked);
+        }
+
+        // Метод для проверки состояния клавиатуры
+        public static bool IsKeyboardEnabled()
+        {
+            return !_isKeyboardBlocked; // Если клавиатура не заблокирована, возвращаем true
         }
     }
 }

@@ -24,6 +24,9 @@ namespace Crony
 
             // Установка события на потерю фокуса окна
             this.Deactivate += MainForm_Deactivate;
+
+            // Устанавливаем начальное состояние кнопки
+            UpdateToggleButtonText();
         }
 
         // Метод для открытия и закрытия окна
@@ -31,13 +34,11 @@ namespace Crony
         {
             if (isWindowOpen)
             {
-                Console.WriteLine(2);
                 this.Hide();  // Скрываем окно, если оно было открыто
                 isWindowOpen = false;  // Обновляем флаг
             }
             else
             {
-                Console.WriteLine(1);
                 this.Show();  // Показываем окно, если оно было скрыто
                 this.BringToFront();  // Делаем окно на переднем плане
                 this.Activate();  // Программно активируем окно
@@ -55,7 +56,27 @@ namespace Crony
             }
         }
 
+        // Метод для изменения текста на кнопке в зависимости от состояния клавиатуры
+        private void UpdateToggleButtonText()
+        {
+            if (KeyboardManager.IsKeyboardEnabled())
+            {
+                btnToggleKeyboard.Text = "Выключить клавиатуру";
+            }
+            else
+            {
+                btnToggleKeyboard.Text = "Включить клавиатуру";
+            }
+        }
+
         // Обработчик события кнопки ToggleKeyboard
-        
+        private void btnToggleKeyboard_Click(object sender, EventArgs e)
+        {
+            // Переключаем состояние клавиатуры
+            KeyboardManager.ToggleKeyboard();
+
+            // Обновляем текст на кнопке после изменения состояния клавиатуры
+            UpdateToggleButtonText();
+        }
     }
 }
