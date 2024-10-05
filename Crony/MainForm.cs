@@ -7,11 +7,15 @@ namespace Crony
     {
         private bool isWindowOpen = false; // Флаг состояния окна
 
+        private GlobalHotKey globalHotKey; // Переменная для глобальной горячей клавиши
+
         public MainForm()
         {
             InitializeComponent();
 
-            // Устанавливаем свойства формы для предотвращения появления иконки в панели задач
+            // Регистрация горячей клавиши Ctrl + Shift + K
+            globalHotKey = new GlobalHotKey((int)GlobalHotKey.KeyModifiers.Ctrl | (int)GlobalHotKey.KeyModifiers.Shift, Keys.K, this);
+
             this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
             this.StartPosition = FormStartPosition.Manual;
@@ -19,7 +23,7 @@ namespace Crony
 
             // Фиксированное положение окна
             this.Location = new System.Drawing.Point(
-                Screen.PrimaryScreen.WorkingArea.Width - this.Width * 3 / 2, 
+                Screen.PrimaryScreen.WorkingArea.Width - this.Width * 3 / 2,
                 Screen.PrimaryScreen.WorkingArea.Height - this.Height - 1);
 
             // Установка события на потерю фокуса окна
@@ -29,7 +33,7 @@ namespace Crony
             UpdateToggleButtonText();
         }
 
-        // Метод для открытия и закрытия окна
+        // Метод для открытия/закрытия окна
         public void ToggleWindow()
         {
             if (isWindowOpen)
@@ -46,14 +50,24 @@ namespace Crony
             }
         }
 
+        // Метод для обработки сообщений Windows (для горячей клавиши)
+        protected override void WndProc(ref Message m)
+        {
+            const int WM_HOTKEY = 0x0312;
+            if (m.Msg == WM_HOTKEY)
+            {
+                // Если горячая клавиша сработала, меняем состояние клавиатуры
+                KeyboardManager.ToggleKeyboard();
+                UpdateToggleButtonText();  // Обновляем текст на кнопке
+            }
+            base.WndProc(ref m);
+        }
+
         // Обработчик для сворачивания окна при потере фокуса
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
-            if (isWindowOpen)
-            {
-                this.Hide();  // Скрываем окно при потере фокуса
-                isWindowOpen = false;  // Обновляем флаг
-            }
+            this.Hide(); // Скрываем окно при потере фокуса
+            isWindowOpen = false;  // Обновляем флаг
         }
 
         // Метод для изменения текста на кнопке в зависимости от состояния клавиатуры
@@ -77,6 +91,13 @@ namespace Crony
 
             // Обновляем текст на кнопке после изменения состояния клавиатуры
             UpdateToggleButtonText();
+        }
+
+        // Метод для освобождения ресурсов (отписка от горячих клавиш)
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            globalHotKey?.Dispose(); // Отписываемся от горячей клавиши
+            base.OnFormClosing(e);
         }
     }
 }
