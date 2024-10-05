@@ -2,7 +2,7 @@
 ## Your little support windows tray app
 
 <div style="text-align: center;">
-    <img src="Resources\icon.ico" alt="Icon" />
+    <img src="Crony\Resources\icon.ico" alt="Icon" />
 </div>
 
 Functionality:
