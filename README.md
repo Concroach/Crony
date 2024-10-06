@@ -6,7 +6,7 @@
 </div>
 
 Functionality:
-* Disabling the keyboard (hotkey Ctrl+Shift+K is available)
+* Disabling the keyboard (hotkey lShift + rShift is available)
 
 Supported platforms:
 * Windows 10, 11
