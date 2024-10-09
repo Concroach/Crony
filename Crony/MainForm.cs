@@ -5,7 +5,7 @@ namespace Crony
 {
     public partial class MainForm : Form
     {
-        private bool isWindowOpen = false; // Флаг состояния окна
+        private bool _isWindowOpen = false; // Флаг состояния окна
         private KeyboardHook _keyboardHook;
 
         public MainForm()
@@ -38,7 +38,7 @@ namespace Crony
         private void OnHotkeyPressed()
         {
             // Переключаем состояние клавиатуры
-            KeyboardManager.ToggleKeyboard();
+            KeyboardManager.KeyboardManager.ToggleKeyboard();
 
             // Обновляем текст на кнопке после изменения состояния клавиатуры
             UpdateToggleButtonText();
@@ -47,7 +47,7 @@ namespace Crony
         // Метод для обновления текста на кнопке в зависимости от состояния клавиатуры
         private void UpdateToggleButtonText()
         {
-            if (KeyboardManager.IsKeyboardEnabled())
+            if (KeyboardManager.KeyboardManager.IsKeyboardEnabled())
             {
                 btnToggleKeyboard.Text = "Выключить клавиатуру";
             }
@@ -61,7 +61,7 @@ namespace Crony
         private void btnToggleKeyboard_Click(object sender, EventArgs e)
         {
             // Переключаем состояние клавиатуры
-            KeyboardManager.ToggleKeyboard();
+            KeyboardManager.KeyboardManager.ToggleKeyboard();
 
             // Обновляем текст на кнопке после изменения состояния клавиатуры
             UpdateToggleButtonText();
@@ -70,27 +70,27 @@ namespace Crony
         // Метод для открытия и закрытия окна
         public void ToggleWindow()
         {
-            if (isWindowOpen)
+            if (_isWindowOpen)
             {
                 this.Hide();  // Скрываем окно, если оно было открыто
-                isWindowOpen = false;  // Обновляем флаг
+                _isWindowOpen = false;  // Обновляем флаг
             }
             else
             {
                 this.Show();  // Показываем окно, если оно было скрыто
                 this.BringToFront();  // Делаем окно на переднем плане
                 this.Activate();  // Программно активируем окно
-                isWindowOpen = true;  // Обновляем флаг
+                _isWindowOpen = true;  // Обновляем флаг
             }
         }
 
         // Обработчик для сворачивания окна при потере фокуса
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
-            if (isWindowOpen)
+            if (_isWindowOpen)
             {
                 this.Hide();  // Скрываем окно при потере фокуса
-                isWindowOpen = false;  // Обновляем флаг
+                _isWindowOpen = false;  // Обновляем флаг
             }
         }
     }

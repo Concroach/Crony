@@ -1,11 +1,11 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Crony
+namespace Crony.KeyboardManager
 {
     class KeyboardManager
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern void BlockInput(bool fBlockIt);
+        private static extern void BlockInput(bool fBlockIt);
 
         private static bool _isKeyboardBlocked = false;
 
