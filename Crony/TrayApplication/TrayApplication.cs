@@ -14,9 +14,9 @@ namespace Crony
 
             trayIcon = new NotifyIcon()
             {
-                Icon = new System.Drawing.Icon("resources/icon.ico"), // Укажи путь к своей иконке
+                Icon = new System.Drawing.Icon("resources/icon.ico"),
                 Visible = true,
-                Text = "Tray App"
+                Text = "Crony Tray App"
             };
 
             trayIcon.Click += TrayIcon_Click;
@@ -24,7 +24,7 @@ namespace Crony
 
         private void TrayIcon_Click(object sender, EventArgs e)
         {
-            mainForm.ToggleWindow(); // Открытие/закрытие окна
+            mainForm.ToggleWindow();
         }
     }
 }

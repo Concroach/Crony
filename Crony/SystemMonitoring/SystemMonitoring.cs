@@ -8,7 +8,7 @@ namespace Crony
         {
             float cpuUsage = GetCpuUsage();
             float ramUsage = GetRamUsage();
-            float gpuUsage = GetGpuUsage();  // Пример реализации через WMI
+            float gpuUsage = GetGpuUsage();
             return (cpuUsage, ramUsage, gpuUsage);
         }
 
@@ -26,7 +26,6 @@ namespace Crony
 
         private static float GetGpuUsage()
         {
-            // Реализуй через WMI или другие API
             return 0; // Заглушка
         }
     }

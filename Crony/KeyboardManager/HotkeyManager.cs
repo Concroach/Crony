@@ -44,7 +44,7 @@ namespace Crony
                 int vkCode = Marshal.ReadInt32(lParam);
                 Keys key = (Keys)vkCode;
 
-                if (wParam == (IntPtr)0x100 || wParam == (IntPtr)0x104) // WM_KEYDOWN or WM_SYSKEYDOWN
+                if (wParam == (IntPtr)0x100 || wParam == (IntPtr)0x104)
                 {
                     if (key == Keys.LShiftKey)
                     {
@@ -57,11 +57,10 @@ namespace Crony
 
                     if (_leftShiftPressed && _rightShiftPressed)
                     {
-                        // Оба шифта зажаты — вызываем событие
                         OnHotkeyPressed?.Invoke();
                     }
                 }
-                else if (wParam == (IntPtr)0x101 || wParam == (IntPtr)0x105) // WM_KEYUP or WM_SYSKEYUP
+                else if (wParam == (IntPtr)0x101 || wParam == (IntPtr)0x105)
                 {
                     if (key == Keys.LShiftKey)
                     {

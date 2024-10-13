@@ -11,11 +11,9 @@ namespace Crony
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Создаем экземпляр приложения с треем
             var trayApp = new TrayApplication();
             
-            // Ожидание работы приложения
-            Application.Run(); // Просто ждем событий от системы
+            Application.Run();
         }
     }
 }
