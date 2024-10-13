@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Crony
 {
-    public class KeyboardHook : IDisposable
+    public class HotkeyManager : IDisposable
     {
         private IntPtr _hookID = IntPtr.Zero;
         private const int WH_KEYBOARD_LL = 13;
@@ -16,7 +16,7 @@ namespace Crony
 
         public event Action OnHotkeyPressed;
 
-        public KeyboardHook()
+        public HotkeyManager()
         {
             _proc = HookCallback;
             _hookID = SetHook(_proc);

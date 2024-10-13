@@ -6,13 +6,13 @@ namespace Crony
     public partial class MainForm : Form
     {
         private bool _isWindowOpen = false;
-        private readonly KeyboardHook _keyboardHook;
+        private readonly HotkeyManager _keyboardHook;
 
         public MainForm()
         {
             InitializeComponent();
 
-            _keyboardHook = new KeyboardHook();
+            _keyboardHook = new HotkeyManager();
             _keyboardHook.OnHotkeyPressed += OnHotkeyPressed;
 
             this.FormBorderStyle = FormBorderStyle.None;
