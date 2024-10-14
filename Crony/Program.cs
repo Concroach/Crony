@@ -6,13 +6,12 @@ namespace Crony
     static class Program
     {
         [STAThread]
-        private static void Main()
+        static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var trayApp = new TrayApplication();
-            
+            TrayApplication trayApp = new TrayApplication();
             Application.Run();
         }
     }

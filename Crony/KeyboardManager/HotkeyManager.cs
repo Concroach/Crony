@@ -5,36 +5,34 @@ using System.Windows.Forms;
 
 namespace Crony
 {
-    public class KeyboardHook : IDisposable
+    public class HotkeyManager : IDisposable
     {
-        private IntPtr _hookID = IntPtr.Zero;
-        private const int WH_KEYBOARD_LL = 13;
-        private LowLevelKeyboardProc _proc;
+        private readonly IntPtr _hookId;
+        private const int WhKeyboardLl = 13;
+        private readonly LowLevelKeyboardProc _proc;
 
         private bool _leftShiftPressed = false;
         private bool _rightShiftPressed = false;
 
-        public event Action OnHotkeyPressed;
+        public event Action? OnHotkeyPressed;
 
-        public KeyboardHook()
+        public HotkeyManager()
         {
             _proc = HookCallback;
-            _hookID = SetHook(_proc);
+            _hookId = SetHook(_proc);
         }
 
         public void Dispose()
         {
-            UnhookWindowsHookEx(_hookID);
+            UnhookWindowsHookEx(_hookId);
         }
 
-        private IntPtr SetHook(LowLevelKeyboardProc proc)
+        private static IntPtr SetHook(LowLevelKeyboardProc proc)
         {
-            using (Process curProcess = Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
-            {
-                return SetWindowsHookEx(WH_KEYBOARD_LL, proc,
-                    GetModuleHandle(curModule.ModuleName), 0);
-            }
+            using var curProcess = Process.GetCurrentProcess();
+            using ProcessModule? curModule = curProcess.MainModule;
+            return SetWindowsHookEx(WhKeyboardLl, proc,
+                GetModuleHandle(curModule.ModuleName), 0);
         }
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
@@ -73,7 +71,7 @@ namespace Crony
                 }
             }
 
-            return CallNextHookEx(_hookID, nCode, wParam, lParam);
+            return CallNextHookEx(_hookId, nCode, wParam, lParam);
         }
 
         [DllImport("user32.dll")]

@@ -1,8 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Crony.KeyboardManager
+namespace Crony
 {
-    class KeyboardManager
+    internal static class KeyboardManager
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern void BlockInput(bool fBlockIt);

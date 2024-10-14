@@ -5,26 +5,26 @@ namespace Crony
 {
     class TrayApplication
     {
-        private NotifyIcon trayIcon;
-        private MainForm mainForm;
+        private NotifyIcon _trayIcon;
+        private MainForm _mainForm;
 
         public TrayApplication()
         {
-            mainForm = new MainForm();
+            _mainForm = new MainForm();
 
-            trayIcon = new NotifyIcon()
+            _trayIcon = new NotifyIcon()
             {
                 Icon = new System.Drawing.Icon("resources/icon.ico"),
                 Visible = true,
                 Text = "Crony Tray App"
             };
 
-            trayIcon.Click += TrayIcon_Click;
+            _trayIcon.Click += TrayIcon_Click;
         }
 
         private void TrayIcon_Click(object sender, EventArgs e)
         {
-            mainForm.ToggleWindow();
+            _mainForm.ToggleWindow();
         }
     }
 }
