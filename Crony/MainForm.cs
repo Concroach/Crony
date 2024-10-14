@@ -15,18 +15,18 @@ namespace Crony
         
         private float _previousCpuUsage;
         private float _previousRamUsage;
-
-        private readonly HotkeyManager _keyboardHook;
+        
         private bool _isWindowOpen = false;
 
         private Label _lblCpuUsage;
         private Label _lblRamUsage;
         private Label _lblDiskUsage;
+        private readonly HotkeyManager _keyboardHook;
 
         public MainForm()
         {
             InitializeComponent();
-
+            
             _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             _diskCounter = new PerformanceCounter("LogicalDisk", "% Disk Time", "_Total");
@@ -35,7 +35,7 @@ namespace Crony
             _updateTimer.Interval = 1000; // Секунда
             _updateTimer.Tick += UpdateResourceUsage;
             _updateTimer.Start();
-
+            
             _keyboardHook = new HotkeyManager();
             _keyboardHook.OnHotkeyPressed += OnHotkeyPressed;
 
