@@ -11,7 +11,7 @@ namespace Crony
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            TrayApplication trayApp = new TrayApplication();
+            TrayApplication.TrayApplication trayApp = new TrayApplication.TrayApplication();
             Application.Run();
         }
     }

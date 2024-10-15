@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Crony
+namespace Crony.SystemMonitoring
 {
     class SystemMonitoring
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Crony
+﻿namespace Crony.SessionTimer
 {
     public static class SessionTimer
     {

@@ -1,4 +1,4 @@
-﻿namespace Crony
+﻿namespace Crony.MusicRecognizer
 {
     class MusicRecognizer
     {
