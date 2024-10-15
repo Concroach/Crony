@@ -2,6 +2,5 @@
 build/
 bin/
 obj/
-Crony.csproj
 Crony.csproj.user
 Crony.sln.DotSettings.user
