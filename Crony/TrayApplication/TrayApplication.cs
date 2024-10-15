@@ -17,11 +17,11 @@ namespace Crony.TrayApplication
             _trayMenu = new ContextMenuStrip();
 
             
-            ToolStripMenuItem checkUpdatesItem = new ToolStripMenuItem("Обновление");
+            ToolStripMenuItem checkUpdatesItem = new ToolStripMenuItem("Update");
             checkUpdatesItem.Click += CheckUpdates_Click;
             _trayMenu.Items.Add(checkUpdatesItem);
 
-            ToolStripMenuItem exitItem = new ToolStripMenuItem("Закрыть");
+            ToolStripMenuItem exitItem = new ToolStripMenuItem("Exit");
             exitItem.Click += Exit_Click;
             _trayMenu.Items.Add(exitItem);
 
@@ -58,7 +58,7 @@ namespace Crony.TrayApplication
 
         private static void CheckUpdates_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Проверка обновлений (заглушка)");
+            MessageBox.Show("Stable version");
         }
         
         private static void Exit_Click(object sender, EventArgs e)
