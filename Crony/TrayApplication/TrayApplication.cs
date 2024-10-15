@@ -1,27 +1,71 @@
-﻿namespace Crony.TrayApplication
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Crony.TrayApplication
 {
     class TrayApplication
     {
-        private NotifyIcon _trayIcon;
+        private static NotifyIcon _trayIcon;
         private MainForm _mainForm;
+        
+        private static ContextMenuStrip _trayMenu;
 
         public TrayApplication()
         {
             _mainForm = new MainForm();
+            _trayMenu = new ContextMenuStrip();
+
+            
+            ToolStripMenuItem checkUpdatesItem = new ToolStripMenuItem("Обновление");
+            checkUpdatesItem.Click += CheckUpdates_Click;
+            _trayMenu.Items.Add(checkUpdatesItem);
+
+            ToolStripMenuItem exitItem = new ToolStripMenuItem("Закрыть");
+            exitItem.Click += Exit_Click;
+            _trayMenu.Items.Add(exitItem);
 
             _trayIcon = new NotifyIcon()
             {
-                Icon = new System.Drawing.Icon("resources/icon.ico"),
+                Icon = new Icon("resources/icon.ico"),
+                ContextMenuStrip = _trayMenu,
                 Visible = true,
                 Text = "Crony Tray App"
             };
 
-            _trayIcon.Click += TrayIcon_Click;
+            _trayIcon.MouseClick += TrayIcon_MouseClick;
         }
 
-        private void TrayIcon_Click(object sender, EventArgs e)
+        private void TrayIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            _mainForm.ToggleWindow();
+            if (e.Button == MouseButtons.Left)
+            {
+                _mainForm.ToggleWindow();
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                ShowTrayMenuAboveIcon();
+            }
+        }
+
+        private void ShowTrayMenuAboveIcon()
+        {
+            var workingArea = Screen.PrimaryScreen.WorkingArea;
+            int x = Cursor.Position.X;
+            int y = workingArea.Bottom - _trayMenu.Size.Height;
+            _trayMenu.Show(x, y);
+        }
+
+        private static void CheckUpdates_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Проверка обновлений (заглушка)");
+        }
+        
+        private static void Exit_Click(object sender, EventArgs e)
+        {
+            _trayIcon.Visible = false;
+            Application.Exit();
         }
     }
+    
 }

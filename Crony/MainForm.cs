@@ -27,7 +27,7 @@ namespace Crony
             _diskCounter = new PerformanceCounter("LogicalDisk", "% Disk Time", "_Total");
 
             _updateTimer = new Timer();
-            _updateTimer.Interval = 2000; // 1 секунда
+            _updateTimer.Interval = 2000; // 2 seconds
             _updateTimer.Tick += UpdateResourceUsage;
             _updateTimer.Start();
 
