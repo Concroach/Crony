@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Crony
@@ -11,8 +12,9 @@ namespace Crony
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             TrayApplication.TrayApplication trayApp = new TrayApplication.TrayApplication();
+
             Application.Run();
         }
     }
