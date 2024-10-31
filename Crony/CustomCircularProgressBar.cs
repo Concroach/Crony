@@ -65,14 +65,14 @@ public class CircularProgressBar : Control
                 (int)Math.Round(360.0 / 100 * _actualValue));
         }
 
-        // StringFormat sf = new StringFormat
-        // {
-        //     Alignment = StringAlignment.Center,
-        //     LineAlignment = StringAlignment.Center
-        // };
-        // e.Graphics.DrawString(Math.Round(_actualValue) + "%", Font, 
-        //                         new SolidBrush(ForeColor),
-        //                         new RectangleF(0, 0, Width, Height), sf);
+        StringFormat sf = new StringFormat
+        {
+            Alignment = StringAlignment.Center,
+            LineAlignment = StringAlignment.Center
+        };
+        e.Graphics.DrawString(Math.Round(_actualValue) + "%", Font,
+                                new SolidBrush(ForeColor),
+                                new RectangleF(0, 0, Width, Height), sf);
     }
 
     public int AnimationInterval { get; set; } = 2;
