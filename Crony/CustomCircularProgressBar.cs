@@ -87,9 +87,9 @@ public class CircularProgressBar : Control
         }
     }
 
-    public Color BarColor { get; set; } = Color.Green;
+    public Color BarColor { get; set; } = Color.LightGreen;
     public Color InternalColor { get; set; } = Color.White;
-    private Color BarBackColor { get; set; } = Color.Gray;
+    private Color BarBackColor { get; set; } = Color.Silver;
     public int BarWidth { get; set; } = 6;
 
     protected override void OnResize(EventArgs e)

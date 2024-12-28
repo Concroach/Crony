@@ -5,3 +5,4 @@ obj/
 Crony.csproj.user
 Crony.sln.DotSettings.user
 Resources
+app.manifest

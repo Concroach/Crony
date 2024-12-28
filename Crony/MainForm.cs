@@ -22,6 +22,21 @@ namespace Crony
         {
             InitializeComponent();
 
+            FormBorderStyle = FormBorderStyle.None;
+
+            this.Paint += (s, e) =>
+            {
+                int cornerRadius = 20;
+                var graphicsPath = new System.Drawing.Drawing2D.GraphicsPath();
+                graphicsPath.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
+                graphicsPath.AddArc(Width - cornerRadius - 1, 0, cornerRadius, cornerRadius, 270, 90);
+                graphicsPath.AddArc(Width - cornerRadius - 1, Height - cornerRadius - 1, cornerRadius, cornerRadius, 0, 90);
+                graphicsPath.AddArc(0, Height - cornerRadius - 1, cornerRadius, cornerRadius, 90, 90);
+                graphicsPath.CloseFigure();
+
+                Region = new Region(graphicsPath);
+            };
+            
             _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             _diskCounter = new PerformanceCounter("LogicalDisk", "% Disk Time", "_Total");
@@ -71,7 +86,7 @@ namespace Crony
         {
             if (value < 65)
             {
-                progressBar.BarColor = Color.Green;
+                progressBar.BarColor = Color.ForestGreen;
             }
             else if (value < 90)
             {

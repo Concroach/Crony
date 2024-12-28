@@ -53,7 +53,7 @@
             cpuIcon.BackColor = Color.White;
 
             // RAM Icon
-            ramIcon.Location = new Point(_windowWidth / 2 - _circleWidth / 4 - 4, _windowHeight / 4 - _circleHeight / 4 + 6);
+            ramIcon.Location = new Point(_windowWidth / 2 - _circleWidth / 4 - 3, _windowHeight / 4 - _circleHeight / 4 + 6);
             ramIcon.Size = new Size(48, 28);
             ramIcon.SizeMode = PictureBoxSizeMode.StretchImage;
             ramIcon.Image = Image.FromFile("Resources/ram.png");
@@ -72,7 +72,7 @@
             cpuProgressBar.Name = "cpuProgressBar";
             cpuProgressBar.Size = new Size(_circleWidth, _circleHeight);
             cpuProgressBar.InternalColor = Color.White;
-            cpuProgressBar.BarColor = Color.Green;
+            cpuProgressBar.BarColor = Color.LightGreen;
             cpuProgressBar.BarWidth = _progressWidth;
 
             // RAM ProgressBar
@@ -80,7 +80,7 @@
             ramProgressBar.Name = "ramProgressBar";
             ramProgressBar.Size = new Size(_circleWidth, _circleHeight);
             ramProgressBar.InternalColor = Color.White;
-            ramProgressBar.BarColor = Color.Green;
+            ramProgressBar.BarColor = Color.LightGreen;
             ramProgressBar.BarWidth = _progressWidth;
 
             // Disk ProgressBar
@@ -88,7 +88,7 @@
             diskProgressBar.Name = "diskProgressBar";
             diskProgressBar.Size = new Size(_circleWidth, _circleHeight);
             diskProgressBar.InternalColor = Color.White;
-            diskProgressBar.BarColor = Color.Green;
+            diskProgressBar.BarColor = Color.LightGreen;
             diskProgressBar.BarWidth = _progressWidth;
 
             
@@ -109,10 +109,11 @@
 
             
             // btnToggleKeyboard
-            btnToggleKeyboard.Location = new Point(_windowWidth / 2 - _btnToggleKeyboardWidth / 2 , _windowHeight - _btnToggleKeyboardHeight * 3/2);
+            btnToggleKeyboard.Location = new Point(_windowWidth / 2 - _btnToggleKeyboardWidth / 2 , _windowHeight - _btnToggleKeyboardHeight * 3/2 - 8);
             btnToggleKeyboard.Size = new Size(_btnToggleKeyboardWidth, _btnToggleKeyboardHeight);
             btnToggleKeyboard.Text = "Toggle Keyboard";
             btnToggleKeyboard.Click += new System.EventHandler(btnToggleKeyboard_Click);
+            btnToggleKeyboard.BackColor = Color.White;
 
             // MainForm Settings
             ClientSize = new Size(_windowWidth, _windowHeight);
